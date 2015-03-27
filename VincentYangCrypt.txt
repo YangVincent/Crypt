@@ -1,0 +1,12 @@
+Vincent Yang Read Me
+Crypt:
+
+Usage Instructions:
+
+to Encrypt: call encrypt with the in/out file names, and the key.
+	method Header: public void encrypt(String inputFileName, String outputFilename, String key)
+to Decrypt: call decrypt with the in/out file names, and the key.
+	method Header: public void decrypt(String inputFileName, String outputFileName, String key)
+
+Statistics: 
+	RunTime: 205395225
