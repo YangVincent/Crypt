@@ -6,19 +6,15 @@ import java.util.*;
 public class Crypt
 {
 	//FIELDS
-	//private static final int numLetterChange = 5; //the number of letters to shift in the alphabet, make as input
-    private String s_lineSeparator = System.getProperty("line.separator");
+    	private String s_lineSeparator = System.getProperty("line.separator");
 
 	//CONSTRUCTORS
 	public Crypt()
 	{
-
 	}
-
 
 	private static HashMap<String, String> initAlpha(String key)
 	{
-
 		HashSet keyAlpha = new HashSet();
 		HashMap<String, String> cipher = new HashMap<String, String>(26*2);
 		ArrayList<Character> alphabet = new ArrayList<Character>(26*2);
@@ -26,12 +22,6 @@ public class Crypt
 		{
 			alphabet.add(new Character((char)i));
 		}
-		/*
-		for (int i = 97; i <= 122; i++) //lower case
-		{
-			alphabet.add(new Character((char)i));
-		}
-        */
 		Character[] allAlphabet = alphabet.toArray(new Character[0]);
 		int alphaCounter = 0;
 		String currentChar = null;
@@ -41,24 +31,16 @@ public class Crypt
 			{
 				currentChar = key.charAt(i)+"";
 				cipher.put(allAlphabet[alphaCounter]+"",currentChar.toUpperCase() );
-				//System.out.println("Map " +allAlphabet[alphaCounter] + ", " + currentChar.toUpperCase());
-				// add corresponding lower case
 				cipher.put((allAlphabet[alphaCounter++]+"").toLowerCase(),currentChar.toLowerCase() );
 				alphabet.remove(new Character(Character.toUpperCase(key.charAt(i))));
-			}
-			else
-			{
-				//System.out.println("Skipping " + key.charAt(i));
 			}
 		}
 		//put in the rest of the alphabet
 
 		while (!alphabet.isEmpty())
 		{
-			//System.out.println("size of alphabet is " + alphabet.size());
 			currentChar = alphabet.remove(alphabet.size()-1)+"";
 			cipher.put(allAlphabet[alphaCounter]+"",currentChar.toUpperCase());
-			//System.out.println(alphaCounter+" Map " + allAlphabet[alphaCounter] + ", " + currentChar.toUpperCase());
 			cipher.put((allAlphabet[alphaCounter++]+"").toLowerCase(),currentChar.toLowerCase() );
 		}
 		return cipher;
@@ -74,10 +56,6 @@ public class Crypt
 
 		try
 		{
-			//reader = new FileReader (inputFilename);
-			//bReader = new BufferedReader (reader);
-			//writer = new FileWriter(outputFilename);
-			//bWriter = new BufferedWriter(writer);
 			bReader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFileName)));
 			bWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName)));
 
@@ -85,7 +63,6 @@ public class Crypt
 			HashMap<String, String> alphabet = initAlpha(key);
 			while (in.hasNextLine())
 			{
-				//StringBuffer input = new StringBuffer(in.nextLine() + System.getProperty("line.separator"));
 				String input =in.nextLine() + s_lineSeparator;
 				StringBuilder encryptedText = new StringBuilder();
 				String currentChar = null;
@@ -125,7 +102,6 @@ public class Crypt
 	}
 	private static HashMap<String, String> initDecryptAlpha(String key)
 	{
-		//System.out.println("decrypt");
 		HashSet keyAlpha = new HashSet();
 		HashMap<String, String> cipher = new HashMap<String, String>(26*2);
 		ArrayList<Character> alphabet = new ArrayList<Character>(26*2);
@@ -133,11 +109,6 @@ public class Crypt
 		{
 			alphabet.add(new Character((char)i));
 		}
-		/*
-		for (int i = 97; i <= 122; i++) //lower case
-		{
-			alphabet.add(new Character((char)i));
-		}*/
 
 		Character[] allAlphabet = alphabet.toArray(new Character[0]);
 		int alphaCounter = 0;
@@ -148,14 +119,10 @@ public class Crypt
 			{
 				currentChar = key.charAt(i)+"";
 				cipher.put(currentChar.toUpperCase(), allAlphabet[alphaCounter]+"");
-				//System.out.println("Map " + currentChar.toUpperCase() + ", " + allAlphabet[alphaCounter]);
 				cipher.put(currentChar.toLowerCase(), (allAlphabet[alphaCounter++]+"").toLowerCase());
 				alphabet.remove(new Character(Character.toUpperCase(key.charAt(i))));
 			}
-			else
-			{
-				//System.out.println("Skipping " + key.charAt(i));
-			}
+
 		}
 		//put in the rest of the alphabet
 
@@ -163,7 +130,6 @@ public class Crypt
 		{
 			currentChar = alphabet.remove(alphabet.size()-1)+"";
 			cipher.put(currentChar, allAlphabet[alphaCounter]+"");
-			//System.out.println("Map " + currentChar + ", " + allAlphabet[alphaCounter-1]);
 			cipher.put(currentChar.toLowerCase(), (allAlphabet[alphaCounter++]+"").toLowerCase());
 		}
 		return cipher;
@@ -179,10 +145,6 @@ public class Crypt
 
 		try
 		{
-			//reader = new FileReader (inputFilename);
-			//bReader = new BufferedReader (reader);
-			//writer = new FileWriter(outputFilename);
-			//bWriter = new BufferedWriter(writer);
 			bReader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFileName)));
 			bWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName)));
 			HashMap<String, String> alphabet = initDecryptAlpha(key);
@@ -191,7 +153,6 @@ public class Crypt
 			{
 				String input = in.nextLine() + s_lineSeparator;
 				StringBuilder decryptedText = new StringBuilder();
-				//StringBuffer input = new StringBuffer(in.nextLine());
 				//DECRYPT DATA HERE
 				String currentChar = null;
 				for (int i = 0; i < input.length(); i++)
@@ -228,8 +189,4 @@ public class Crypt
 			}
 		}
 	}
-
-
-	//testing
-
 }
