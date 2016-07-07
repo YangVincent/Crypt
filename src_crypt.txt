@@ -1,2 +1,0 @@
-"E:\\Java\\AP Projects\\Crypt\\Crypt.java"
-"E:\\Java\\AP Projects\\Crypt\\CryptTester.java"
